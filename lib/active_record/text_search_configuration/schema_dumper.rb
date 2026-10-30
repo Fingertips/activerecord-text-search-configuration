@@ -23,6 +23,7 @@ module ActiveRecord
 
       private
 
+      # rubocop:disable-next Metrics/AbcSize
       def text_search_configuration(stream, configuration)
         stream.puts("  create_text_search_configuration(\n")
         stream.puts("    #{configuration[:name].inspect},")
