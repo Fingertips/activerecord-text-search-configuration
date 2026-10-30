@@ -10,15 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_01_01_120001) do
+ActiveRecord::Schema[8.2].define(version: 2025_01_01_120001) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "pg_catalog.plpgsql"
+  enable_extension "plpgsql"
   enable_extension "unaccent"
 
-  create_text_search_configuration "simple_unaccent", parser: "default", force: :cascade, mappings: {
-    ["asciiword", "numword", "email", "url", "host", "sfloat", "version", "hword_numpart", "hword_asciipart", "numhword", "asciihword", "url_path", "file", "float", "int", "uint"] => ["simple"],
-    ["word", "hword_part", "hword"] => ["unaccent", "simple"]
-  }
+  create_text_search_configuration(
+    "simple_unaccent",
+    parser: "default",
+    force: :cascade,
+    mappings: {
+      ["asciiword", "numword", "email", "url", "host", "sfloat", "version", "hword_numpart", "hword_asciipart", "numhword", "asciihword", "url_path", "file", "float", "int", "uint"] => ["simple"],
+      ["word", "hword_part", "hword"] => ["unaccent", "simple"]
+    }
+  )
 
   create_table "articles", force: :cascade do |t|
     t.text "title", null: false
